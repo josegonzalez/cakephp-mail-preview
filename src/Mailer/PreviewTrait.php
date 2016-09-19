@@ -61,8 +61,8 @@ trait PreviewTrait
         $boundary = $property->getValue($this->_email);
 
         $parts = [];
-        $email_segments = explode('--' . $boundary, $message);
-        foreach ($email_segments as $segment) {
+        $segments = explode('--' . $boundary, $message);
+        foreach ($segments as $segment) {
             preg_match("/(Content-Type: )([\w\/]+)/", $segment, $match);
             if (empty($match)) {
                 continue;
@@ -72,6 +72,7 @@ trait PreviewTrait
             $text = preg_replace('/Content-(Type|ID|Disposition|Transfer-Encoding):.*?\r\n/is', "", $segment);
             $parts[$part] = $text;
         }
+
         return $parts;
     }
 }

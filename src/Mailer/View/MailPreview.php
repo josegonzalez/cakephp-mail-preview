@@ -15,6 +15,7 @@ class MailPreview
         if ($this->validPreview($name)) {
             return $name;
         }
+
         return false;
     }
 
@@ -39,6 +40,7 @@ class MailPreview
         if ($pos = strrpos($classname, '\\')) {
             return substr($classname, $pos + 1);
         }
+
         return $pos;
     }
 

@@ -29,6 +29,7 @@ class MailPreviewController extends AppController
         $part = $this->request->query('part');
         if (!empty($part) && $part === 'message') {
             $this->response->body($this->viewVars['email']['message']);
+
             return $this->response->send();
         }
     }
@@ -55,6 +56,7 @@ class MailPreviewController extends AppController
             if ($part = $this->findPart($email, $partType)) {
                 $this->response->type($partType);
                 $this->response->body($part);
+
                 return $this->response->send();
             } else {
                 throw new MissingActionException("Email part '#{partType}' not found in #{@preview.name}##{email}");
@@ -107,6 +109,7 @@ class MailPreviewController extends AppController
                 return $part;
             }
         }
+
         return $part;
     }
 
@@ -144,7 +147,7 @@ class MailPreviewController extends AppController
                 }
                 if (T_CLASS === $tokens[$index][0]) {
                     $index += 2; // Skip class keyword and whitespace
-                    $fqcns[] = $namespace.'\\'.$tokens[$index][1];
+                    $fqcns[] = $namespace . '\\' . $tokens[$index][1];
                 }
             }
         }

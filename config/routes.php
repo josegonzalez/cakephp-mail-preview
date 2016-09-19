@@ -1,7 +1,7 @@
 <?php
 use Cake\Core\Configure;
-use Cake\Routing\Route\DashedRoute;
 use Cake\Routing\Router;
+use Cake\Routing\Route\DashedRoute;
 
 if (Configure::read('debug')) {
     return;
