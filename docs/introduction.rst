@@ -2,7 +2,7 @@ Introduction
 ------------
 
 CakePHP MailPreview Plugin
-~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 A simple CakePHP plugin for use with previewing emails during development.
 
@@ -15,4 +15,7 @@ Requirements
 What does this plugin do?
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* Provides a web ui for previewing emails with dummy data
+* preview HTML or plain text emails from within your web browser
+* emails are reloaded with each view so you can tweak/save/refresh for instant verification
+* integrates perfectly with existing test fixtures
+* only exposes routes in development mode to prevent leaking into production mode
