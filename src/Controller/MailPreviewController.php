@@ -65,8 +65,11 @@ class MailPreviewController extends AppController
 
     protected function getMailPreviewsFromPath($path)
     {
-        $fqcns = [];
+        if (!is_dir($path)) {
+            return [];
+        }
 
+        $fqcns = [];
         $allFiles = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path));
         $phpFiles = new RegexIterator($allFiles, '/\.php$/');
         foreach ($phpFiles as $phpFile) {
