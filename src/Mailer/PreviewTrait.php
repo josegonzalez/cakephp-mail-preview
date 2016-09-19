@@ -53,6 +53,13 @@ trait PreviewTrait
         return $result;
     }
 
+    /**
+     * Returns an array of email parts
+     *
+     * @param string $message A email message
+     * @param string $emailFormat The configured format of the email
+     * @return array
+     **/
     protected function parseParts($message, $emailFormat)
     {
         $reflection = new ReflectionClass($this->_email);
