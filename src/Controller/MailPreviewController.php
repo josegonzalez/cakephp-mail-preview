@@ -1,7 +1,6 @@
 <?php
 namespace Josegonzalez\MailPreview\Controller;
 
-use Cake\Controller\Exception\MissingActionException;
 use Cake\Core\Configure;
 use Cake\Event\Event;
 use Exception;
@@ -35,7 +34,7 @@ class MailPreviewController extends AppController
                 return $this->response->send();
             }
 
-            throw new MissingActionException(sprintf(
+            throw new Exception(sprintf(
                 "Email part '%s' not found in %s::%s",
                 $partType,
                 $mailPreview->previewName(),
@@ -132,6 +131,6 @@ class MailPreviewController extends AppController
             return [$mailPreview, $email];
         }
 
-        throw new MissingActionException("Mailer preview ${name} not found");
+        throw new Exception("Mailer preview ${name} not found");
     }
 }
