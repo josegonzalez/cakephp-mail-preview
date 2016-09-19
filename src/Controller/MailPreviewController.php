@@ -51,18 +51,14 @@ class MailPreviewController extends AppController
     protected function getMailPreviews()
     {
         $classNames = Configure::read('MailPreview.Previews.classNames');
-        if (!empty($classNames)) {
-            $mailPreviews = [];
-            foreach ($classNames as $className) {
-                $mailPreviews[] = new $className;
-            }
-            return $mailPreviews;
+        if (empty($classNames)) {
+            $path = APP . 'Mailer' . DS . 'View' . DS;
+            $classNames = $this->getMailPreviewsFromPath($path);
         }
 
-        $path = APP . 'Mailer' . DS . 'View' . DS;
         $mailPreviews = [];
-        foreach ($this->getMailPreviewsFromPath($path) as $mailPreview) {
-            $mailPreviews[] = new $mailPreview;
+        foreach ($classNames as $className) {
+            $mailPreviews[] = new $className;
         }
 
         return $mailPreviews;
