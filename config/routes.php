@@ -3,7 +3,7 @@ use Cake\Core\Configure;
 use Cake\Routing\Router;
 use Cake\Routing\Route\DashedRoute;
 
-if (Configure::read('debug')) {
+if (Configure::read('debug') === 0) {
     return;
 }
 
