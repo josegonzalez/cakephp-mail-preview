@@ -47,7 +47,7 @@ class MailPreviewController extends AppController
             throw new Exception(sprintf(
                 "Email part '%s' not found in %s::%s",
                 $partType,
-                $mailPreview->previewName(),
+                $mailPreview->name(),
                 $emailName
             ));
         }
@@ -166,7 +166,7 @@ class MailPreviewController extends AppController
     {
         list($previewName, $emailName) = $path;
         foreach ($this->getMailPreviews() as $mailPreview) {
-            if ($mailPreview->previewName() !== $previewName) {
+            if ($mailPreview->name() !== $previewName) {
                 continue;
             }
 

@@ -1,5 +1,5 @@
 <?php foreach ($mailPreviews as $mailPreview) : ?>
-    <h3><?= $mailPreview->previewName() ?></h3>
+    <h3><?= $mailPreview->name() ?></h3>
     <table cellpadding="0" cellspacing="0">
         <tbody>
         <?php foreach ($mailPreview->getEmails() as $email) : ?>
@@ -9,7 +9,7 @@
                     echo $this->Html->link($email, [
                         'controller' => 'MailPreview',
                         'action' => 'email',
-                        $mailPreview->previewName(),
+                        $mailPreview->name(),
                         $email,
                     ]);
                     ?>

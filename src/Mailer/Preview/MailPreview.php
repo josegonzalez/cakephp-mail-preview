@@ -49,7 +49,7 @@ class MailPreview
      *
      * @return string
      **/
-    public function previewName()
+    public function name()
     {
         $classname = get_class($this);
         if ($pos = strrpos($classname, '\\')) {
