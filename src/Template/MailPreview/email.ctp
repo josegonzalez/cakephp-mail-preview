@@ -21,7 +21,7 @@
             font: 12px "Lucida Grande", sans-serif;
             height: 100px;
             margin: 0;
-            overflow: hidden;
+            overflow: scroll;
             padding: 10px 0 0 0;
             width: 100%;
         }
@@ -102,7 +102,10 @@
                 </dd>
             <?php endif; ?>
 
-            <?php if (!empty($email['parts'])) : ?>
+            <dt>Format</dt>
+            <dd><?php echo $part; ?></dd>
+
+            <?php if (!empty($email['parts']) && count($email['parts']) > 1) : ?>
             <dd>
                 <select onchange="formatChanged(this);">
                     <option <?php echo (\Cake\Utility\Hash::get($this->request->query, 'part', $part) == 'text/html') ? 'selected' : ''; ?> value="?part=text%2Fhtml">View as HTML email</option>

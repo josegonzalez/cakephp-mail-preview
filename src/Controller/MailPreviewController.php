@@ -113,7 +113,7 @@ class MailPreviewController extends AppController
             }
         }
 
-        return $part;
+        return null;
     }
 
     protected function findPreview($path)

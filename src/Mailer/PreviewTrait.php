@@ -46,14 +46,14 @@ trait PreviewTrait
         $result['headersArray'] = $this->_email->getHeaders($headers);
 
         // HACK: Multi-part emails are presented as a text blob, parse the parts out
-        $result['parts'] = $this->parseParts($result['message']);
+        $result['parts'] = $this->parseParts($result['message'], $this->_email->emailFormat());
 
         $this->reset();
 
         return $result;
     }
 
-    protected function parseParts($message)
+    protected function parseParts($message, $emailFormat)
     {
         $reflection = new ReflectionClass($this->_email);
         $property = $reflection->getProperty('_boundary');
@@ -71,6 +71,14 @@ trait PreviewTrait
             $part = $match[2];
             $text = preg_replace('/Content-(Type|ID|Disposition|Transfer-Encoding):.*?\r\n/is', "", $segment);
             $parts[$part] = $text;
+        }
+
+        if (empty($parts)) {
+            $part = 'text/html';
+            if ($emailFormat === 'text') {
+                $part = 'text/plain';
+            }
+            $parts[$part] = $message;
         }
 
         return $parts;
