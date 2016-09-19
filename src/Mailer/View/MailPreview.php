@@ -22,7 +22,6 @@ class MailPreview
     public function getEmails()
     {
         $emails = [];
-        $baseClass = new ReflectionClass(get_class());
         foreach (get_class_methods($this) as $methodName) {
             if (!$this->validPreview($methodName)) {
                 continue;
