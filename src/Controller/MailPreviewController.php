@@ -12,27 +12,6 @@ use RegexIterator;
 
 class MailPreviewController extends AppController
 {
-    public function beforeRender(Event $event)
-    {
-        if ($this->request->action === 'index') {
-            return;
-        }
-
-        if (!isset($this->viewVars['email'])) {
-            throw new Exception('No email was set for the view');
-        } else {
-            $this->viewBuilder()->layout(false);
-            $this->viewBuilder()->template('email');
-        }
-
-        $part = $this->request->query('part');
-        if (!empty($part) && $part === 'message') {
-            $this->response->body($this->viewVars['email']['message']);
-
-            return $this->response->send();
-        }
-    }
-
     public function index()
     {
         $this->viewBuilder()->layout(false);
@@ -45,11 +24,8 @@ class MailPreviewController extends AppController
         list($mailPreview, $email) = $this->findPreview($this->request->params['pass']);
         $partType = $this->request->query('part', null);
 
-        $this->set('title', sprintf('Mailer Preview for %s', $name));
-
         $email = $mailPreview->$email();
-        $this->viewBuilder()->layout = false;
-        $this->set('email', $email);
+        $this->viewBuilder()->layout(false);
 
         if ($partType) {
             if ($part = $this->findPart($email, $partType)) {
@@ -57,13 +33,14 @@ class MailPreviewController extends AppController
                 $this->response->body($part);
 
                 return $this->response->send();
-            } else {
-                throw new MissingActionException("Email part '#{partType}' not found in #{@preview.name}##{email}");
             }
-        } else {
-            $this->set('part', $this->findPreferredPart($email, $this->request->query('part')));
-            $this->viewBuilder()->layout = false;
+
+            throw new MissingActionException("Email part '#{partType}' not found in #{@preview.name}##{email}");
         }
+
+        $this->set('title', sprintf('Mailer Preview for %s', $name));
+        $this->set('email', $email);
+        $this->set('part', $this->findPreferredPart($email, $this->request->query('part')));
     }
 
     protected function getMailPreviews()
@@ -77,58 +54,17 @@ class MailPreviewController extends AppController
             return $mailPreviews;
         }
 
+        $path = APP . 'Mailer' . DS . 'View' . DS;
         $mailPreviews = [];
-        foreach ($this->getMailPreviewsFromNamespace() as $mailPreview) {
+        foreach ($this->getMailPreviewsFromPath($path) as $mailPreview) {
             $mailPreviews[] = new $mailPreview;
         }
 
         return $mailPreviews;
     }
 
-    protected function findPreview($path)
+    protected function getMailPreviewsFromPath($path)
     {
-        list($previewName, $emailName) = $path;
-        foreach ($this->getMailPreviews() as $mailPreview) {
-            if ($mailPreview->previewName() !== $previewName) {
-                continue;
-            }
-
-            $email = $mailPreview->find($emailName);
-            if (!$email) {
-                continue;
-            }
-
-            return [$mailPreview, $email];
-        }
-
-        throw new MissingActionException("Mailer preview ${name} not found");
-    }
-
-    protected function findPreferredPart($email, $format)
-    {
-        if (empty($format)) {
-            foreach ($email['parts'] as $part => $content) {
-                return $part;
-            }
-        }
-
-        return $part;
-    }
-
-    protected function findPart($email, $partType)
-    {
-        foreach ($email['parts'] as $part => $content) {
-            if ($part === $partType) {
-                return $content;
-            }
-        }
-
-        return null;
-    }
-
-    protected function getMailPreviewsFromNamespace()
-    {
-        $path = APP . 'Mailer' . DS . 'View' . DS;
         $fqcns = [];
 
         $allFiles = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path));
@@ -155,5 +91,46 @@ class MailPreviewController extends AppController
         }
 
         return $fqcns;
+    }
+
+    protected function findPart($email, $partType)
+    {
+        foreach ($email['parts'] as $part => $content) {
+            if ($part === $partType) {
+                return $content;
+            }
+        }
+
+        return null;
+    }
+
+    protected function findPreferredPart($email, $format)
+    {
+        if (empty($format)) {
+            foreach ($email['parts'] as $part => $content) {
+                return $part;
+            }
+        }
+
+        return $part;
+    }
+
+    protected function findPreview($path)
+    {
+        list($previewName, $emailName) = $path;
+        foreach ($this->getMailPreviews() as $mailPreview) {
+            if ($mailPreview->previewName() !== $previewName) {
+                continue;
+            }
+
+            $email = $mailPreview->find($emailName);
+            if (!$email) {
+                continue;
+            }
+
+            return [$mailPreview, $email];
+        }
+
+        throw new MissingActionException("Mailer preview ${name} not found");
     }
 }
