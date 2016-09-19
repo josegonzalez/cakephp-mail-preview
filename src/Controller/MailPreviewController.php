@@ -21,10 +21,10 @@ class MailPreviewController extends AppController
     public function email()
     {
         $name = implode('::', $this->request->params['pass']);
-        list($mailPreview, $email) = $this->findPreview($this->request->params['pass']);
+        list($mailPreview, $emailName) = $this->findPreview($this->request->params['pass']);
         $partType = $this->request->query('part', null);
 
-        $email = $mailPreview->$email();
+        $email = $mailPreview->$emailName();
         $this->viewBuilder()->layout(false);
 
         if ($partType) {
@@ -35,7 +35,12 @@ class MailPreviewController extends AppController
                 return $this->response->send();
             }
 
-            throw new MissingActionException("Email part '#{partType}' not found in #{@preview.name}##{email}");
+            throw new MissingActionException(sprintf(
+                "Email part '%s' not found in %s::%s",
+                $partType,
+                $mailPreview->previewName(),
+                $emailName
+            ));
         }
 
         $this->set('title', sprintf('Mailer Preview for %s', $name));
