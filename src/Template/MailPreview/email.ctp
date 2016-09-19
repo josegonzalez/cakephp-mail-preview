@@ -102,9 +102,6 @@
                 </dd>
             <?php endif; ?>
 
-            <dt>Format</dt>
-            <dd><?php echo $part; ?></dd>
-
             <?php if (!empty($email['parts']) && count($email['parts']) > 1) : ?>
             <dd>
                 <select onchange="formatChanged(this);">
@@ -112,6 +109,9 @@
                     <option <?php echo (\Cake\Utility\Hash::get($this->request->query, 'part', $part) == 'text/plain') ? 'selected' : ''; ?> value="?part=text%2Fplain">View as plain-text email</option>
                 </select>
             </dd>
+            <?php else: ?>
+                <dt>Format</dt>
+                <dd><?php echo $part; ?></dd>
             <?php endif; ?>
         </dl>
     </header>
