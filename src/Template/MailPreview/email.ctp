@@ -81,7 +81,7 @@
             <dt>To:</dt>
             <dd><?php echo $email['headersArray']['To'] ?></dd>
 
-            <?php if (!empty($email['headersArray']['Cd'])) : ?>
+            <?php if (!empty($email['headersArray']['Cc'])) : ?>
                 <dt>CC:</dt>
                 <dd><?php echo $email['headersArray']['Cc'] ?></dd>
             <?php endif; ?>
