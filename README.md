@@ -9,6 +9,20 @@
 
 A simple CakePHP plugin for use with previewing emails during development.
 
+This plugin was inspired by the Rails 4.1 feature, Action Mailer Previews, as well
+as the 37signals `mail_view` gem.
+
+Alternatives to this plugin include any of the following:
+
+* [MailCatcher](https://mailcatcher.me/): A super simple SMTP server which catches any message sent to it to display in a web interface.
+* [MailHog](https://github.com/mailhog/MailHog): A Web and API based SMTP testing service.
+
+This plugin is *specifically* meant to bring Rapid Application Development to
+email development by enabling developers to simply update a template and
+reload the browser. Developers are encouraged to use other tools as their
+needs change.
+
+
 ## Requirements
 
 * CakePHP 3.x

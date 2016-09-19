@@ -1,6 +1,6 @@
 {
     "name": "josegonzalez/cakephp-mail-preview",
-    "description": "MailPreview plugin for CakePHP",
+    "description": "CakePHP plugin for use with previewing emails during development",
     "type": "cakephp-plugin",
     "keywords": ["cakephp", "email", "mail", "preview"],
     "homepage": "https://github.com/josegonzalez/cakephp-mail-preview",
