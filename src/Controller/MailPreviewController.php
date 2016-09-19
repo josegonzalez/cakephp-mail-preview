@@ -151,6 +151,7 @@ class MailPreviewController extends AppController
         }
 
         $part = $this->findPart($email, $partType);
+
         return $part ?: null;
     }
 
