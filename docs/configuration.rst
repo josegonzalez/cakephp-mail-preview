@@ -1,22 +1,26 @@
 Plugin configuration options
 ----------------------------
 
-This plugin can be configured via your ``config/app.php``. It works similar
-to how all other CakePHP engine-based libraries work (Cache, Email, Log), and
-as such you can have multiple backends under different names. Here is an example
+This plugin can be configured via your ``config/app.php``. Here is an example
 config stanza:
 
 .. code:: php
 
     /**
-     * Configures the Queuesadilla engine to read from mysql as it's database
+     * Configures the MailPreview plugin
      */
-    'Queuesadilla' => [
-        'default' => [
-            'url' => env('QUEUESADILLA_DEFAULT_URL', ''),
+    'MailPreview' => [
+        'Routes' => [
+            // the router class for the MailPreview plugin
+            'class' => 'Cake\Routing\Route\DashedRoute',
+            // prefix to use for accessing the MailPreview plugin routes
+            'prefix' => '/mail-preview',
+        ],
+        'Previews' => [
+            // A list of classNames to override the automatically detected classes
+            // Useful when loading previews from plugins
+            'classNames' => [
+                'App\Mailer\View\UserMailPreview',
+            ],
         ],
     ],
-
-Note that the config array is passed as settings to the queueing engine. Please
-refer to the Queuesadilla `docs <http://josegonzalez.viewdocs.io/php-queuesadilla/>`_
-for more information on how each engine can be configured.
