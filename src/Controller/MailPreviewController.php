@@ -68,10 +68,13 @@ class MailPreviewController extends AppController
 
     protected function getMailPreviews()
     {
-        // todo: automatically retrieve these
-        $previewClass = Configure::read('MailPreview.previewClass');
-        if (!empty($previewClass)) {
-            return $previewClass;
+        $classNames = Configure::read('MailPreview.Previews.classNames');
+        if (!empty($classNames)) {
+            $mailPreviews = [];
+            foreach ($classNames as $className) {
+                $mailPreviews[] = new $className;
+            }
+            return $mailPreviews;
         }
 
         $mailPreviews = [];
