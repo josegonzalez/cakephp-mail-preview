@@ -38,7 +38,6 @@ trait PreviewTrait
         $transport = new DebugTransport();
         $this->_email->transport($transport);
 
-
         $result = $this->_email->send();
 
         // HACK: Email headers are presented as a text blob, let's avoid parsing it
