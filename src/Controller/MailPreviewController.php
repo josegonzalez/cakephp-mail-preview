@@ -1,10 +1,10 @@
 <?php
 namespace Josegonzalez\MailPreview\Controller;
 
+use App\Controller\AppController;
 use Cake\Core\Configure;
 use Cake\Event\Event;
 use Exception;
-use Josegonzalez\MailPreview\Controller\AppController;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use RegexIterator;
