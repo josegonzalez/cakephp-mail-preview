@@ -23,7 +23,7 @@ Requirements
 ~~~~~~~~~~~~
 
 * CakePHP 3.x
-* PHP 5.4+
+* PHP 5.5+
 
 What does this plugin do?
 ~~~~~~~~~~~~~~~~~~~~~~~~~
