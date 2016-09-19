@@ -70,7 +70,7 @@ trait PreviewTrait
 
             $part = $match[2];
             $text = preg_replace('/Content-(Type|ID|Disposition|Transfer-Encoding):.*?\r\n/is', "", $segment);
-            $parts[$part] = $text;
+            $parts[$part] = trim($text);
         }
 
         if (empty($parts)) {
