@@ -87,7 +87,7 @@
             <?php endif; ?>
 
             <dt>Date:</dt>
-            <dd><?php echo 'Time.current.rfc2822' ?></dd>
+            <dd><?php echo $email['headersArray']['Date'] ?></dd>
 
             <dt>Subject:</dt>
             <dd><strong><?php echo $email['headersArray']['Subject'] ?></strong></dd>
