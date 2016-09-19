@@ -15,7 +15,6 @@ class MailPreviewController extends AppController
     public function beforeRender(Event $event)
     {
         if ($this->request->action === 'index') {
-            $this->viewBuilder()->layout(false);
             return;
         }
 
@@ -126,7 +125,7 @@ class MailPreviewController extends AppController
 
     protected function getMailPreviewsFromNamespace()
     {
-        $path = APP . 'Mailer' .DS . 'View' . DS;
+        $path = APP . 'Mailer' . DS . 'View' . DS;
         $fqcns = [];
 
         $allFiles = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path));
