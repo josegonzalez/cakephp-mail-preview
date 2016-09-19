@@ -4,6 +4,7 @@ namespace Josegonzalez\MailPreview\Controller;
 use App\Controller\AppController;
 use Cake\Core\Configure;
 use Cake\Event\Event;
+use  Cake\Network\Exception\ForbiddenException;
 use Exception;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -11,6 +12,13 @@ use RegexIterator;
 
 class MailPreviewController extends AppController
 {
+    public function beforeFilter(Event $event)
+    {
+        if (Configure::read('debug') === 0) {
+            throw new ForbiddenException;
+        }
+    }
+
     /**
      * Handles mail-preview/index
      *
