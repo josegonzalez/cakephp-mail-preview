@@ -11,12 +11,22 @@ use RegexIterator;
 
 class MailPreviewController extends AppController
 {
+    /**
+     * Handles mail-preview/index
+     *
+     * @return void
+     */
     public function index()
     {
         $this->viewBuilder()->layout(false);
         $this->set('mailPreviews', $this->getMailPreviews());
     }
 
+    /**
+     * Handles mail-preview/email
+     *
+     * @return void
+     */
     public function email()
     {
         $name = implode('::', $this->request->params['pass']);
@@ -47,6 +57,11 @@ class MailPreviewController extends AppController
         $this->set('part', $this->findPreferredPart($email, $this->request->query('part')));
     }
 
+    /**
+     * Retrieves an array of MailPreview objects
+     *
+     * @return array
+     **/
     protected function getMailPreviews()
     {
         $classNames = Configure::read('MailPreview.Previews.classNames');
@@ -63,6 +78,12 @@ class MailPreviewController extends AppController
         return $mailPreviews;
     }
 
+    /**
+     * Returns an array of MailPreview class names for a given path
+     *
+     * @param string $path Path to MailPreview directory
+     * @return array
+     **/
     protected function getMailPreviewsFromPath($path)
     {
         if (!is_dir($path)) {
@@ -96,7 +117,14 @@ class MailPreviewController extends AppController
         return $fqcns;
     }
 
-    protected function findPart($email, $partType)
+    /**
+     * Finds a specified email part
+     *
+     * @param array $email An array of email data
+     * @param string $partType The name of a part
+     * @return null|string
+     **/
+    protected function findPart(array $email, $partType)
     {
         foreach ($email['parts'] as $part => $content) {
             if ($part === $partType) {
@@ -107,17 +135,32 @@ class MailPreviewController extends AppController
         return null;
     }
 
-    protected function findPreferredPart($email, $format)
+    /**
+     * Finds a specified email part or the first part available
+     *
+     * @param array $email An array of email data
+     * @param string $partType The name of a part
+     * @return null|string
+     **/
+    protected function findPreferredPart(array $email, $partType)
     {
-        if (empty($format)) {
+        if (empty($partType)) {
             foreach ($email['parts'] as $part => $content) {
                 return $part;
             }
         }
 
-        return null;
+        $part = $this->findPart($email, $partType);
+        return $part ?: null;
     }
 
+    /**
+     * Returns a matching MailPreview object with name
+     *
+     * @param string $path A MailPreview/email path
+     * @return array
+     * @throws Exception
+     **/
     protected function findPreview($path)
     {
         list($previewName, $emailName) = $path;
