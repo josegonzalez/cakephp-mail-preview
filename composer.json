@@ -1,0 +1,36 @@
+{
+    "name": "josegonzalez/cakephp-mail-preview",
+    "description": "MailPreview plugin for CakePHP",
+    "type": "cakephp-plugin",
+    "keywords": ["cakephp", "email", "mail", "preview"],
+    "homepage": "https://github.com/josegonzalez/cakephp-mail-preview",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jose Diaz-Gonzalez",
+            "email": "cakephp+mail-preview@josediazgonzalez.com",
+            "homepage": "http://josediazgonzalez.com",
+            "role": "Maintainer"
+        }
+    ],
+    "require": {
+        "cakephp/cakephp": "~3.0",
+        "php": ">=5.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*",
+        "cakephp/cakephp-codesniffer": "dev-master",
+        "satooshi/php-coveralls": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Josegonzalez\\MailPreview\\": "src",
+            "Josegonzalez\\MailPreview\\Test\\Fixture\\": "tests\\Fixture"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Josegonzalez\\MailPreview\\Test\\": "tests"
+        }
+    }
+}
