@@ -12,8 +12,8 @@
         }
 
         header {
-            background: white;
-            border-bottom: 1px solid #dedede;
+            background: #01545b;
+            color: white;
             font: 12px "Lucida Grande", sans-serif;
             height: 100px;
             margin: 0;
@@ -28,12 +28,12 @@
         }
 
         dt {
-            width: 80px;
-            padding: 1px;
-            float: left;
             clear: left;
+            float: left;
+            font-weight: bolder;
+            padding: 1px;
             text-align: right;
-            color: #7f7f7f;
+            width: 80px;
         }
 
         dd {
