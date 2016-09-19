@@ -3,6 +3,10 @@ use Cake\Core\Configure;
 use Cake\Routing\Route\DashedRoute;
 use Cake\Routing\Router;
 
+if (Configure::read('debug')) {
+    return;
+}
+
 $routeClass = Configure::read('MailPreview.Routes.routeClass');
 $routeClass = $routeClass ?: DashedRoute::class;
 
