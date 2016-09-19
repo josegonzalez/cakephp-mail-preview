@@ -51,7 +51,7 @@ class MailPreviewController extends AppController
     {
         $classNames = Configure::read('MailPreview.Previews.classNames');
         if (empty($classNames)) {
-            $path = APP . 'Mailer' . DS . 'View' . DS;
+            $path = APP . 'Mailer' . DS . 'Preview' . DS;
             $classNames = $this->getMailPreviewsFromPath($path);
         }
 

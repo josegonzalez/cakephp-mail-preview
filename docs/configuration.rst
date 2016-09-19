@@ -20,7 +20,7 @@ config stanza:
             // A list of classNames to override the automatically detected classes
             // Useful when loading previews from plugins
             'classNames' => [
-                'App\Mailer\View\UserMailPreview',
+                'App\Mailer\Preview\UserMailPreview',
             ],
         ],
     ],

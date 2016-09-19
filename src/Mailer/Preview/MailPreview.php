@@ -1,5 +1,5 @@
 <?php
-namespace Josegonzalez\MailPreview\Mailer\View;
+namespace Josegonzalez\MailPreview\Mailer\Preview;
 
 use Cake\Mailer\MailerAwareTrait;
 use ReflectionClass;
