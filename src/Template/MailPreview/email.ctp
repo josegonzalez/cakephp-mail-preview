@@ -2,6 +2,10 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <title>
+        Mail Previews:
+        <?= $this->fetch('title') ?>
+    </title>
     <style type="text/css">
         html, body {
             height: 100%;
