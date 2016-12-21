@@ -53,6 +53,7 @@ class MailPreviewController extends AppController
 
         if ($partType) {
             if ($part = $this->findPart($email, $partType)) {
+                Configure::write('debug', 0);
                 $this->response->type($partType);
                 $this->response->body($part);
 
