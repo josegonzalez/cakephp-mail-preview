@@ -1,3 +1,8 @@
+<?php
+if (empty($email)) {
+    return;
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
