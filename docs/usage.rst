@@ -1,8 +1,5 @@
-Usage
------
-
-Basic example
-~~~~~~~~~~~~~
+Example Usage
+-------------
 
 ``MailPreview`` integrates with CakePHP's ``Mailer`` class. All mailers should use the ``Josegonzalez\Mailer\PreviewTrait`` trait. Below is an example ``UserMailer`` with a ``welcome`` email method:
 
