@@ -1,5 +1,5 @@
 Plugin configuration options
-----------------------------
+============================
 
 This plugin can be configured via your ``config/app.php``. Here is an example
 config stanza:
