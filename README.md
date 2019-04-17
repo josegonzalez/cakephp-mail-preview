@@ -7,6 +7,8 @@
 
 # MailPreview Plugin
 
+# This is Deprecated in favor of functionality built into [DebugKit](https://book.cakephp.org/3.0/en/debug-kit.html)
+
 A simple CakePHP plugin for use with previewing emails during development.
 
 This plugin was inspired by the Rails 4.1 feature, Action Mailer Previews, as well
